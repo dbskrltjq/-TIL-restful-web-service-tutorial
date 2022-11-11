@@ -71,6 +71,19 @@
 		    <version>3.0.0</version>
 		</dependency>
 		
+		<!-- actuator -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<!-- HAL Brower -->
+		<dependency>
+		   <groupId>org.springframework.data</groupId>
+		   <artifactId>spring-data-rest-hal-explorer</artifactId>
+			<version>3.5.1</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

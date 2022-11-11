@@ -9,3 +9,10 @@ spring:  messages:    basename: messages
     
   mvc:
     pathmatch:      matching-strategy: ant-path-matcher
+
+### actuator      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
