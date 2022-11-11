@@ -9,10 +9,17 @@ spring:  messages:    basename: messages
     
   mvc:
     pathmatch:      matching-strategy: ant-path-matcher
+  
+  security:
+    user:
+      name: username
+      password: zxcv1234
+      
+      
 
 ### actuator      
 management:
-  endpoints:
+  endpoint:
     web:
       exposure:
         include: "*"

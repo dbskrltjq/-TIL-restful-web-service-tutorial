@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -77,14 +78,21 @@
 		    <artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		
-		<!-- HAL Brower -->
+		<!--  HAL Brower -->
 		<dependency>
 		   <groupId>org.springframework.data</groupId>
 		   <artifactId>spring-data-rest-hal-explorer</artifactId>
 			<version>3.5.1</version>
+		</dependency> 
+		
+			<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
 	</dependencies>
+		
 
 	<build>
 		<plugins>
