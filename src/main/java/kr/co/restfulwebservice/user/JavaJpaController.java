@@ -24,6 +24,9 @@ public class JavaJpaController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private PostRepository postRepository;
+	
 	@GetMapping("/users")		// 전체 사용자 조회
 	public List<UserTest> retrieveAllUsers() {
 		return userRepository.findAll();	
@@ -53,6 +56,38 @@ public class JavaJpaController {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}")
 				.buildAndExpand(savedUser.getId())
+				.toUri();
+		
+		return ResponseEntity.created(location).build();
+	}
+	
+	@GetMapping("/users/{id}/posts")		// /jpa/users/90001/posts
+	public List<Post> retreiveAllPostsByUser(@PathVariable int id) {
+		Optional<UserTest> user = userRepository.findById(id);	
+		
+		if(!user.isPresent()) {
+			throw new UserNotFoundException(String.format("ID[%s] not found", id));
+		}
+		
+		return user.get().getPosts();
+	}
+	
+	@PostMapping("/users/{id}/posts")
+	public ResponseEntity<UserTest> createPost(@PathVariable int id, @RequestBody Post post) {
+		
+		// 사용자 정보를 조회해서 id 값을 post에 지정하기
+		Optional<UserTest> user = userRepository.findById(id);	
+		
+		if(!user.isPresent()) {
+			throw new UserNotFoundException(String.format("ID[%s] not found", id));
+		}
+		
+		post.setUser(user.get());
+		Post savedPost = postRepository.save(post);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(savedPost.getId())
 				.toUri();
 		
 		return ResponseEntity.created(location).build();
