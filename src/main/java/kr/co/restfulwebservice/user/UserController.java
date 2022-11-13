@@ -28,14 +28,14 @@ public class UserController {
 	}
 	
 	@GetMapping("/users")								// 전체 사용자 목록을 반환
-	public List<User> retrieveAllUsers(){
+	public List<UserTest> retrieveAllUsers(){
 		return service.findAll();
 	}
 	
 	// GET방식, uri: /users/1 or /users/10 -> String
 	@GetMapping("/users/{id}")
-	public User retrieveUser(@PathVariable int id) {
-		User user = service.findOne(id);
+	public UserTest retrieveUser(@PathVariable int id) {
+		UserTest user = service.findOne(id);
 		
 		if(user == null) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", id));
@@ -45,8 +45,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-		User savedUser = service.save(user);
+	public ResponseEntity<UserTest> createUser(@Valid @RequestBody UserTest user) {
+		UserTest savedUser = service.save(user);
 		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()		// 사용자 요청 uri
 								.path("/{id}")								// buildAndExpand를 통해 얻는 값이 들어옴
@@ -58,7 +58,7 @@ public class UserController {
 	
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id) {
-		User user = service.deleteById(id);
+		UserTest user = service.deleteById(id);
 		
 		if(user == null) {
 			throw new UserNotFoundException(String.format("[%s]의 사용자가 존재하지 않습니다.", id));
@@ -66,8 +66,8 @@ public class UserController {
 	}
 	
 	@PutMapping("/users")
-	public ResponseEntity<Object> updateUser(@RequestBody User user) {
-		User existUser = service.updateUser(user);
+	public ResponseEntity<Object> updateUser(@RequestBody UserTest user) {
+		UserTest existUser = service.updateUser(user);
 		
 		if(existUser == null) {
 			throw new UserNotFoundException(String.format("[%s]의 사용자가 존재하지 않습니다.", user.getId()));

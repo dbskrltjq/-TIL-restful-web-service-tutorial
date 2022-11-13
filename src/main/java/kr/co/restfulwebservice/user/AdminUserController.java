@@ -28,7 +28,7 @@ public class AdminUserController {
 	@GetMapping("/users")								
 	public MappingJacksonValue retrieveAllUsers() {
 		
-		List<User> users = service.findAll();
+		List<UserTest> users = service.findAll();
 		
 		SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
 				.filterOutAllExcept("id", "name", "joinDate", "password");	// ssn을 제외하고 전달
@@ -47,7 +47,7 @@ public class AdminUserController {
 	// @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=1")	// Headers 값을 이용한 version 관리. Headers 값은 임의로 지정
 	@GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv1+json")
 	public MappingJacksonValue retrieveUserV1(@PathVariable int id) {
-		User user = service.findOne(id);
+		UserTest user = service.findOne(id);
 		
 		if(user == null) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", id));
@@ -68,7 +68,7 @@ public class AdminUserController {
 	// @GetMapping(value = "/users/{id}", headers = "X-API-VERSION=2")	// Headers 값은 임의로 지정
 	@GetMapping(value = "/users/{id}", produces = "application/vnd.company.appv2+json")
 	public MappingJacksonValue retrieveUserV2(@PathVariable int id) {
-		User user = service.findOne(id);
+		UserTest user = service.findOne(id);
 		
 		if(user == null) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", id));

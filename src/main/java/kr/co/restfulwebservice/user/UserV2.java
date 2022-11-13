@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonFilter("UserInfoV2")
-public class UserV2 extends User {
+public class UserV2 extends UserTest {
 	private String grade;
 }

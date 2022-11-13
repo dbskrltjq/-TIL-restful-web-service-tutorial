@@ -9,22 +9,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDaoService {
-	private static List<User> users = new ArrayList<>();		// DB용도로 사용
+	private static List<UserTest> users = new ArrayList<>();		// DB용도로 사용
 	
 	private static int usersCount = 3;
 	
 	static {
-		users.add(new User(1, "Kenneth", new Date(), "pass1", "701010-1111111"));
-		users.add(new User(2, "Alice", new Date(), "pass2", "901010-1112222"));
-		users.add(new User(3, "Elena", new Date(), "pass3", "801010-2211111"));
+		users.add(new UserTest(1, "Kenneth", new Date(), "pass1", "701010-1111111"));
+		users.add(new UserTest(2, "Alice", new Date(), "pass2", "901010-1112222"));
+		users.add(new UserTest(3, "Elena", new Date(), "pass3", "801010-2211111"));
 	}
 	
-	public List<User> findAll(){
+	public List<UserTest> findAll(){
 		return users;
 	}
 	
-	public User findOne(int id) {
-		for(User user : users) {
+	public UserTest findOne(int id) {
+		for(UserTest user : users) {
 			if(user.getId() == id) {
 				return user;
 			}
@@ -32,11 +32,11 @@ public class UserDaoService {
 		return null;
 	}
 	
-	public User deleteById(int id) {
-		Iterator<User> iterator = users.iterator(); 
+	public UserTest deleteById(int id) {
+		Iterator<UserTest> iterator = users.iterator(); 
 		
 		while(iterator.hasNext()) {	// 순차적으로 하나씩의 데이터를 가져온다.
-			User user = iterator.next();
+			UserTest user = iterator.next();
 			
 			if(user.getId() == id) {
 				iterator.remove();
@@ -47,8 +47,8 @@ public class UserDaoService {
 		return null;		// 해당 id가 존재하지 않는 경우
 	}
 	
-	public User updateUser(User user) {
-		User existUser = findOne(user.getId());
+	public UserTest updateUser(UserTest user) {
+		UserTest existUser = findOne(user.getId());
 		
 		if(existUser != null) {
 			existUser.setName(user.getName());
@@ -59,7 +59,7 @@ public class UserDaoService {
 		return null;
 	}
 	
-	public User save(User user) {
+	public UserTest save(UserTest user) {
 		if(user.getId() == null) {
 			user.setId(++usersCount);
 		}
