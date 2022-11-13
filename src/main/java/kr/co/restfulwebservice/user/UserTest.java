@@ -1,10 +1,12 @@
 package kr.co.restfulwebservice.user;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -41,4 +43,19 @@ public class UserTest {
 	private String password;
 	@ApiModelProperty(notes = "사용자 주민번호를 입력해 주세요.")
 	private String ssn;			// 주민등록번호
+	
+	@OneToMany(mappedBy = "user")		// Post 클래스의 사용자 필드명
+	private List<Post> posts;
+
+	public UserTest(Integer id, @Size(min = 2, message = "Name은 2글자 이상 입력해 주세요.") String name, @Past Date joinDate,
+			String password, String ssn) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.joinDate = joinDate;
+		this.password = password;
+		this.ssn = ssn;
+	}
+	
+	
 }
